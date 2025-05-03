@@ -12,7 +12,7 @@ The Quarkus application ingests documents from storage, for which we use minio. 
 
 The project can be used in developement environment i.e. is the local developer machine or in production environment which in this case is the OpenShift platform.
 
-![Environments](./images/env.svg)
+![Environments](./images/high-level-arch.svg)
 
 ## Development Environment Components
 
