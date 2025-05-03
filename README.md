@@ -16,8 +16,6 @@ The project can be used in developement environment i.e. is the local developer 
 
 ## Development Environment Components
 
-![Environments](./images/dev.svg)
-
 ### Quarkus Java Application
 Serves as the core application that processes ingested files and creates embeddings using the AllMiniLmL6V2EmbeddingModel from LangChain4J. Hosts the chatbot interface for user interaction.
 
@@ -70,9 +68,6 @@ What happend when Spring boot Sally and ThreadLocal Theo went to dinner?
 
 ## Production Environment Components
 
-![Environments](./images/production.svg)
-
-
 ### Quarkus Java Application
 Similar to the development environment, it processes files and serves the chatbot interface.
 
@@ -97,7 +92,7 @@ Maintains the same role as in development, providing object storage for files in
 The final deployed application should look something like below.
 
 ### To deploy
-create a namespace/project called `elastic-vector`
+create a namespace/project called `elastic-vector`. The following guidelines assume that everything is deployed in this namespace.
 
 Ensure the Elastic Operator is installed in OpenShift. the CR yaml files are in `deploy/openshift`
 
@@ -109,7 +104,7 @@ An example for each of them is in the deploy/openshift directory
 Get the secret for logging into kibana and for application use later in this section
 
 ```bash
-oc get secret elasticsearch-sample-es-elastic-user -o jsonpath='{.data}' -n elastic-vector | jq
+oc get secret elasticsearch-sample-es-elastic-user -n elastic-vector -o jsonpath='{.data}' | jq -r '.elastic | @base64d'
 ```
 
 Next step is to instll minio
