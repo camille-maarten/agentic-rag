@@ -38,6 +38,9 @@ public class DocumentsIngestor {
     @Inject
     MinioClient minioClient;
 
+    @Inject
+    MinioDocumentLoader minioDocumentLoader;
+
     public void ingest(@Observes StartupEvent event) {
         Log.infof("Ingesting documents...");
         Log.infof("Embedding Store: " + elasticEmbeddingStore.getClass().getSimpleName());
@@ -59,14 +62,14 @@ public class DocumentsIngestor {
         }
 
         List<Document> documents = null;
-        documents = new MinioDocumentLoader(minioClient).loadDocuments(bucketName, new ApacheTikaDocumentParser());
+        documents = minioDocumentLoader.loadDocuments(bucketName, new ApacheTikaDocumentParser());
 
         Log.infof("Total documents loaded by Apache Tika: " + documents.size());
         if (!documents.isEmpty()) {
         var ingestor = EmbeddingStoreIngestor.builder()
                 .embeddingStore(elasticEmbeddingStore)
                 .embeddingModel(embeddingModel)
-                .documentSplitter(recursive(300, 50))
+                .documentSplitter(recursive(50, 0))
                 .build();
 
             IngestionResult result = ingestor.ingest(documents);

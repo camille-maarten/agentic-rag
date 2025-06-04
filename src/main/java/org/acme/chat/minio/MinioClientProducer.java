@@ -1,10 +1,11 @@
 package org.acme.chat.minio;
 
 import io.minio.MinioClient;
+import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.ws.rs.Produces;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
+@ApplicationScoped
 public class MinioClientProducer {
 
     @ConfigProperty(name = "minio.endpoint")
