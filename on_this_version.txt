@@ -1,5 +1,3 @@
-* guardrail failure:
-    * what is kafka
-    * how does kafka relate to AI?
+* model deployment
 * If needed, change the prompt and show RAG
 * Request a joke or poem
