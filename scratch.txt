@@ -8,3 +8,18 @@ git config --global user.email "maarten.vandeperre@gmail.com"
 
 git fetch origin && git reset --hard origin/devspaces-v1-openai
 
+get broker:
+    kubectl get broker kafka-native-broker-broadcast-message-data -n elastic-vector -o jsonpath='{.status.address.url}'
+
+    http://kafka-broker-ingress.knative-eventing.svc.cluster.local/elastic-vector/kafka-native-broker-broadcast-message-data
+
+    curl -X POST \
+      -H "Ce-Id: my-event-id-123" \
+      -H "Ce-Source: my-application" \
+      -H "Ce-Type: com.example.person.updated" \
+      -H "Ce-Specversion: 1.0" \
+      -H "Content-Type: application/json" \
+      -d '{"birthDate": "ok", "personId": "12345", "name": "John Doe"}' \
+      http://kafka-broker-ingress.knative-eventing.svc.cluster.local/elastic-vector/kafka-native-broker-broadcast-message-data
+
+

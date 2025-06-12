@@ -1,6 +1,16 @@
 * show connection of REST endpoint on the socket connection (change the base URL!!!)
     curl --location --request POST \
-    'https://admin-udi-code-redirect-3.apps.cluster-rs76q.rs76q.sandbox1797.opentlc.com/api/chat/broadcast' \
-    --header 'Content-Type: application/json' \
-    --header 'Cookie: 32a1b18c468fe72f69b34ef48eefdd13=03d0954f6b38336b607998168d4c2627' \
-    --data-raw '{"message": "Hello everyone!", "type": "announcement"}'
+        'https://admin-udi-code-redirect-3.apps.cluster-rs76q.rs76q.sandbox1797.opentlc.com/api/chat/broadcast' \
+        --header 'Content-Type: application/json' \
+        --header 'Cookie: 32a1b18c468fe72f69b34ef48eefdd13=03d0954f6b38336b607998168d4c2627' \
+        --data-raw '{"message": "Hello everyone!", "type": "announcement"}'
+* apply assets/knative/knative_broadcast_broker.yaml
+* show via broker configuration:
+    curl -X POST \
+          -H "Ce-Id: my-event-id-123" \
+          -H "Ce-Source: my-application" \
+          -H "Ce-Type: com.example.person.updated" \
+          -H "Ce-Specversion: 1.0" \
+          -H "Content-Type: application/json" \
+          -d '{"birthDate": "ok", "personId": "12345", "name": "John Doe"}' \
+          http://kafka-broker-ingress.knative-eventing.svc.cluster.local/elastic-vector/kafka-native-broker-broadcast-message-data

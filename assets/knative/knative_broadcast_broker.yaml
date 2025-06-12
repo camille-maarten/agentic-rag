@@ -1,0 +1,33 @@
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  annotations:
+    eventing.knative.dev/broker.class: Kafka
+  name: kafka-native-broker-broadcast-message-data
+  namespace: elastic-vector
+spec:
+  config:
+    apiVersion: v1
+    kind: ConfigMap
+    name: kafka-broker-config # config map that holds the kafka broker configurations
+    namespace: knative-eventing
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: kafka-native-broker-trigger-broadcast-message-data
+  namespace: elastic-vector
+spec:
+  broker: kafka-native-broker-broadcast-message-data
+  #  filter:
+  #    expression: >
+  #      cd.data["birthDate"] == "ok"
+  subscriber:
+#    ref:
+#      apiVersion: serving.knative.dev/v1
+#      kind: Service
+#      name: knative-service-microservice-account
+#      namespace: <NAMESPACE>
+#    uri: /api/accounts/data-change/person-data/via-broker
+    uri: https://admin-udi-code-redirect-3.apps.cluster-rs76q.rs76q.sandbox1797.opentlc.com/api/chat/broadcast # !!! change base URL

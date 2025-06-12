@@ -63,6 +63,7 @@ public class ChatSocket {
     @Path("/broadcast")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response broadcastMessage(String messageBody) {
+        System.out.println("Got broadcast message: " + messageBody);
         try {
             // Parse the incoming JSON
             ObjectNode messageNode = (ObjectNode) objectMapper.readTree(messageBody);
