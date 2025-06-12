@@ -1,0 +1,47 @@
+# local podman hosted llm.
+#%dev.quarkus.langchain4j.openai.base-url=http://localhost:52819/v1
+#%dev.quarkus.langchain4j.openai.chat-model.model-name=granite-7b-instruct
+
+# if using local ollama|podman|lmstudio comment the following line
+#%dev.quarkus.langchain4j.openai.api-key=${OPENAI_API_KEY}
+
+%dev.quarkus.langchain4j.openai.base-url=https://mistral-7b-instruct-v0-3-maas-apicast-production.apps.prod.rhoai.rh-aiservices-bu.com:443/v1
+%dev.quarkus.langchain4j.openai.api-key=5a02bf5c8c6bf47c63d90ac706811cd0
+%dev.quarkus.langchain4j.openai.chat-model.model-name=mistral-7b-instruct
+
+# give it some more time, based on local resources..
+%dev.quarkus.langchain4j.openai.timeout=180s
+
+# Enable logging of both requests and responses
+%dev.quarkus.langchain4j.openai.log-requests=true
+%dev.quarkus.langchain4j.openai.log-responses=true
+
+# Elastic search local dev
+%dev.quarkus.elasticsearch.hosts=localhost:9200
+%dev.quarkus.elasticsearch.username=elastic
+%dev.quarkus.elasticsearch.password=UtQETRQu
+#%dev.quarkus.elasticsearch.password=changeme
+quarkus.elasticsearch.devservices.enabled=false
+
+# S3 storage backend by minio. current sandbox setup.
+%dev.minio.endpoint=http://localhost:9000
+%dev.minio.access-key=minioadmin
+%dev.minio.secret-key=minioadmin
+%dev.minio.bucket-name=elastic-bucket
+
+# Elastic certificate mount path. (should be same as in deployment.yaml)
+#%prod.trust-store.path=
+
+## Production setup on Kube/Openshift
+# secret credentials
+%prod.quarkus.kubernetes-config.secrets=app-credentials
+%prod.quarkus.kubernetes-config.secrets.enabled=true
+%prod.quarkus.kubernetes.env.secrets=app-credentials
+%prod.quarkus.kubernetes.env.configmaps=my-quarkus-app-prod-config
+
+# Auto mounts via OpenShift extension
+#quarkus.kubernetes.mounts.es-cert-volume.secret=elasticsearch-sample-es-http-certs-public
+#quarkus.kubernetes.mounts.es-cert-volume.path=/deployments/config
+#quarkus.kubernetes.mounts.es-cert-volume.read-only=true
+#quarkus.kubernetes.secret-volumes.es-cert-volume.secret-name=elasticsearch-sample-es-http-certs-public
+

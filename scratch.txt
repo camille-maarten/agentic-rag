@@ -1,0 +1,8 @@
+mvn -N io.takari:maven:wrapper
+rm -rf ~/.m2/wrapper/dists/
+distributionUrl=https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.6/apache-maven-3.9.6-bin.zip
+./mvnw compile quarkus:dev
+
+git config --global user.name "maarten.vandeperre"
+git config --global user.email "maarten.vandeperre@gmail.com"
+
