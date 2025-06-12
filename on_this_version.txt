@@ -1,0 +1,4 @@
+* guardrail failure:
+    * what is kafka
+    * how does kafka relate to AI?
+* If needed, change the prompt and show RAG
