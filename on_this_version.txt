@@ -1,1 +1,6 @@
-* show response changes to the client
+* show connection of REST endpoint on the socket connection (change the base URL!!!)
+    curl --location --request POST \
+    'https://admin-udi-code-redirect-3.apps.cluster-rs76q.rs76q.sandbox1797.opentlc.com/api/chat/broadcast' \
+    --header 'Content-Type: application/json' \
+    --header 'Cookie: 32a1b18c468fe72f69b34ef48eefdd13=03d0954f6b38336b607998168d4c2627' \
+    --data-raw '{"message": "Hello everyone!", "type": "announcement"}'
