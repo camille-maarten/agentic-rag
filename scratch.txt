@@ -8,6 +8,8 @@ git config --global user.email "maarten.vandeperre@gmail.com"
 
 git fetch origin && git reset --hard origin/devspaces-v1-openai
 
+rm ./src/main/resources/application.properties && cp ../application.properties ./src/main/resources/application.properties
+
 get broker:
     kubectl get broker kafka-native-broker-broadcast-message-data -n elastic-vector -o jsonpath='{.status.address.url}'
 
