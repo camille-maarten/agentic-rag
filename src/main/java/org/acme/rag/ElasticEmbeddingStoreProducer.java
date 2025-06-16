@@ -1,4 +1,4 @@
-package org.acme.chat;
+package org.acme.rag;
 
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.store.embedding.EmbeddingStore;

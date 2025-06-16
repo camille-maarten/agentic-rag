@@ -1,0 +1,850 @@
+{
+  "info": {
+    "_postman_id": "712d73aa-cf20-4ec8-b496-b5b69fb3d28c",
+    "name": "Harry Potter - Agentic AI",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "1259866"
+  },
+  "item": [
+    {
+      "name": "Recipe Requests All - DELETE",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/recipe-requests/all",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "recipe-requests",
+            "all"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Requests Received - GET",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-request-received",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-request-received"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Requests Received - DELETE",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-request-received",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-request-received"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Requests Received - POST",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"req-12345\",\n  \"traceId\": \"trace-67890\",\n  \"initialRequest\": \"Recipe creation request for chocolate cake\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-request-received",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-request-received"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Requests Approved - GET",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-request-approved",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-request-approved"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Requests Approved - DELETE",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-request-approved",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-request-approved"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Requests Approved - POST",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"req-12345\",\n  \"traceId\": \"trace-67890\",\n  \"initialRequest\": \"Recipe creation request approved for chocolate cake\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-request-approved",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-request-approved"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Requests Rejected - GET",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-request-rejected",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-request-rejected"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Requests Rejected - DELETE",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-request-rejected",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-request-rejected"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Requests Rejected - POST",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"req-12345\",\n  \"traceId\": \"trace-67890\",\n  \"initialRequest\": \"Recipe creation request rejected for chocolate cake\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-request-rejected",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-request-rejected"
+          ]
+        }
+      },
+      "response": []
+    },
+
+
+
+
+
+
+
+    {
+      "name": "Recipe Validations All - DELETE",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/recipe-validations/all",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "recipe-validations",
+            "all"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Validations Received - GET",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-validation-received",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-validation-received"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Validations Received - DELETE",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-validation-received",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-validation-received"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Validations Received - POST",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"req-12345\",\n  \"traceId\": \"trace-67890\",\n  \"initialRequest\": \"Recipe creation request for chocolate cake\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-validation-received",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-validation-received"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Validations Approved - GET",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-validation-approved",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-validation-approved"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Validations Approved - DELETE",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-validation-approved",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-validation-approved"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Validations Approved - POST",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"req-12345\",\n  \"traceId\": \"trace-67890\",\n  \"initialRequest\": \"Recipe creation request approved for chocolate cake\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-validation-approved",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-validation-approved"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Validations Rejected - GET",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-validation-rejected",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-validation-rejected"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Validations Rejected - DELETE",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-validation-rejected",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-validation-rejected"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Validations Rejected - POST",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"req-12345\",\n  \"traceId\": \"trace-67890\",\n  \"initialRequest\": \"Recipe creation request rejected for chocolate cake\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-validation-rejected",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-validation-rejected"
+          ]
+        }
+      },
+      "response": []
+    },
+
+
+
+
+
+
+
+    {
+      "name": "Recipe Postprocessors All - DELETE",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/recipe-postprocessors/all",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "recipe-postprocessors",
+            "all"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Postprocessors Received - GET",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-postprocessor-received",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-postprocessor-received"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Postprocessors Received - DELETE",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-postprocessor-received",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-postprocessor-received"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Postprocessors Received - POST",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"req-12345\",\n  \"traceId\": \"trace-67890\",\n  \"initialRequest\": \"Recipe creation request for chocolate cake\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-postprocessor-received",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-postprocessor-received"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Postprocessors Approved - GET",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-postprocessor-approved",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-postprocessor-approved"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Postprocessors Approved - DELETE",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-postprocessor-approved",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-postprocessor-approved"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Postprocessors Approved - POST",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"req-12345\",\n  \"traceId\": \"trace-67890\",\n  \"initialRequest\": \"Recipe creation request approved for chocolate cake\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-postprocessor-approved",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-postprocessor-approved"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Postprocessors Rejected - GET",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-postprocessor-rejected",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-postprocessor-rejected"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Postprocessors Rejected - DELETE",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-postprocessor-rejected",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-postprocessor-rejected"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recipe Postprocessors Rejected - POST",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"req-12345\",\n  \"traceId\": \"trace-67890\",\n  \"initialRequest\": \"Recipe creation request rejected for chocolate cake\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/recipe-postprocessor-rejected",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "recipe-postprocessor-rejected"
+          ]
+        }
+      },
+      "response": []
+    },
+
+
+
+
+
+
+
+
+
+    
+    {
+      "name": "User Message Received - GET",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/user-message-received",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "user-message-received"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "User Message Received - DELETE",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/user-message-received",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "user-message-received"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "User Message Received - POST",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"req-12345\",\n  \"traceId\": \"trace-67890\",\n  \"initialRequest\": \"User message creation request\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/audit/topic/user-message-received",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "audit",
+            "topic",
+            "user-message-received"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

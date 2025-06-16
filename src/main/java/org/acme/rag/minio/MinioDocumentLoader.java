@@ -1,4 +1,4 @@
-package org.acme.chat.minio;
+package org.acme.rag.minio;
 
 import dev.langchain4j.data.document.Document;
 import dev.langchain4j.data.document.DocumentLoader;

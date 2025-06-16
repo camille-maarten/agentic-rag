@@ -1,4 +1,4 @@
-package org.acme.chat.minio;
+package org.acme.rag.minio;
 
 import io.minio.MinioClient;
 import jakarta.enterprise.inject.Produces;

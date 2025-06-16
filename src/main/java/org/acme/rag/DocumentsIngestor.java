@@ -1,4 +1,4 @@
-package org.acme.chat;
+package org.acme.rag;
 
 import dev.langchain4j.data.document.Document;
 import dev.langchain4j.data.document.parser.apache.tika.ApacheTikaDocumentParser;
@@ -11,11 +11,9 @@ import io.minio.BucketExistsArgs;
 import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
 import io.quarkus.logging.Log;
-import io.quarkus.runtime.StartupEvent;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
-import org.acme.chat.minio.MinioDocumentLoader;
+import org.acme.rag.minio.MinioDocumentLoader;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.util.List;
@@ -41,7 +39,8 @@ public class DocumentsIngestor {
     @Inject
     MinioDocumentLoader minioDocumentLoader;
 
-    public void ingest(@Observes StartupEvent event) {
+//    public void ingest(@Observes StartupEvent event) {
+    public void ingest() {
         Log.infof("Ingesting documents...");
         Log.infof("Embedding Store: " + elasticEmbeddingStore.getClass().getSimpleName());
         Log.infof("Embedding Model: " + embeddingModel.getClass().getSimpleName());

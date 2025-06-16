@@ -1,11 +1,10 @@
-package org.acme.chat.minio;
+package org.acme.rag.minio;
 
 
 import dev.langchain4j.data.document.DocumentSource;
 import dev.langchain4j.data.document.Metadata;
 import io.minio.GetObjectArgs;
 import io.minio.MinioClient;
-import jakarta.inject.Inject;
 
 import java.io.InputStream;
 

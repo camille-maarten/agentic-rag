@@ -1,4 +1,4 @@
-package org.acme.chat;
+package org.acme.rag;
 
 import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.model.embedding.onnx.allminilml6v2.AllMiniLmL6V2EmbeddingModel;
