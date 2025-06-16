@@ -1,0 +1,18 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: rhaiis-runner-route
+  namespace: elastic-vector
+  labels:
+    app: rhaiis-runner
+spec:
+  path: /
+  to:
+    kind: Service
+    name: rhaiis-runner-service
+    weight: 100
+  port:
+    targetPort: 8000
+  tls:
+    termination: edge
+  wildcardPolicy: None
