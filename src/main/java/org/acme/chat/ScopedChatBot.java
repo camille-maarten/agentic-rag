@@ -1,6 +1,7 @@
 package org.acme.chat;
 
 import dev.langchain4j.service.SystemMessage;
+import dev.langchain4j.service.V;
 import io.quarkiverse.langchain4j.RegisterAiService;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.acme.rag.ElasticAugmentor;
@@ -45,10 +46,10 @@ public interface ScopedChatBot {
             The recipe or dish should at all cost not contain any of the restrictions as ingredient.
                         
             ---
-            recipe: {{recipe}}
-            restrictions: {{restrictions}}
+            recipe: {recipe}
+            restrictions: {restrictions}
             """)
-    String doesTheRecipeMatchDietaryRestrictions(String recipe, String restrictions);
+    String doesTheRecipeMatchDietaryRestrictions(@V("recipe") String recipe, @V("recipe") String restrictions);
 }
 
 /*
