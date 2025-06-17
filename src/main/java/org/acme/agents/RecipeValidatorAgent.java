@@ -39,6 +39,11 @@ public class RecipeValidatorAgent {
                         dataMessage.getOriginalRequest(),
                         "it got declined as being a recipe: " + itARecipeResult
                 );
+                HttpUtils.httpCall(
+                        "kafka-native-broker-broadcast-message-data",
+                        dataMessage.getOriginalRequest(),
+                        "No no no, this is not about recipes!"
+                );
             } else {
                 HttpUtils.httpCall(
                         "kafka-native-broker-recipe-validation-approved-data",

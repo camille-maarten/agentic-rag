@@ -10,6 +10,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.utils.DataMessage;
+import org.acme.utils.HttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,13 @@ public class RecipeValidationsAuditResource {
         try {
             System.out.println("/topic/recipe-validation-received => " + message);
             var dataMessage = new ObjectMapper().readValue(message, DataMessage.class);
-            return submitDataMessage("recipe-validation-received", dataMessage);
+            submitDataMessage("recipe-validation-received", dataMessage);
+            HttpUtils.httpCall(
+                    "kafka-native-broker-broadcast-message-data",
+                    dataMessage.getOriginalRequest(),
+                    "Cool! You really asked about a recipe. Good boy!"
+            );
+            return Response.ok().build();
         } catch (Exception e) {
             System.out.println("error: " + e.getMessage());
             return Response.ok().build();
