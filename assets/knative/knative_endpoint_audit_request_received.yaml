@@ -15,7 +15,7 @@ spec:
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
-  name: kafka-native-broker-trigger-request-received-audit-fix2
+  name: kafka-native-broker-trigger-request-received-audit
   namespace: elastic-vector
 spec:
   broker: kafka-native-broker-request-received-data

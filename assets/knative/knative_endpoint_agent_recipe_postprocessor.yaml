@@ -1,7 +1,7 @@
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
-  name: kafka-native-broker-trigger-recipe-content-validator-agent
+  name: kafka-native-broker-trigger-recipe-postprocessor-agent
   namespace: elastic-vector
 spec:
   broker: kafka-native-broker-recipe-content-validation-approved-data
@@ -44,7 +44,7 @@ metadata:
 spec:
   broker: kafka-native-broker-recipe-postprocessor-approved-data
   subscriber:
-    uri: https://admin-udi-code-redirect-3.apps.cluster-rs76q.rs76q.sandbox1797.opentlc.com/api/audit/topic/recipe-validation-approved # !!! change base URL
+    uri: https://admin-udi-code-redirect-3.apps.cluster-rs76q.rs76q.sandbox1797.opentlc.com/api/audit/topic/recipe-postprocessor-approved # !!! change base URL
 
 ---
 apiVersion: eventing.knative.dev/v1
@@ -55,7 +55,7 @@ metadata:
 spec:
   broker: kafka-native-broker-recipe-postprocessor-rejected-data
   subscriber:
-    uri: https://admin-udi-code-redirect-3.apps.cluster-rs76q.rs76q.sandbox1797.opentlc.com/api/audit/topic/recipe-validation-rejected # !!! change base URL
+    uri: https://admin-udi-code-redirect-3.apps.cluster-rs76q.rs76q.sandbox1797.opentlc.com/api/audit/topic/recipe-postprocessor-rejected # !!! change base URL
 
 
 

@@ -36,4 +36,8 @@ oc exec -it my-cluster-kafka-0 \
   --bootstrap-server my-cluster-kafka-bootstrap.elastic-vector.svc.cluster.local:9092 \
   --topic person-data-changed-topic
 
-
+oc apply -f assets/knative/knative_broadcast_broker.yaml
+oc apply -f assets/knative/knative_endpoint_audit_request_received.yaml
+oc apply -f assets/knative/knative_endpoint_agent_recipe_validator.yaml
+oc apply -f assets/knative/knative_endpoint_agent_recipe_content_validator.yaml
+oc apply -f assets/knative/knative_endpoint_agent_recipe_postprocessor.yaml

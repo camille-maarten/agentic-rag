@@ -34,9 +34,9 @@ public class RecipePostProcessorAgent {
             if ("false".equalsIgnoreCase(itARecipeFromAValidRegionResult)) {
                 HttpUtils.httpCall("kafka-native-broker-recipe-postprocessor-rejected-data", dataMessage.getOriginalRequest(), "it got declined as being a recipe from a valid region: " + itARecipeFromAValidRegionResult);
                 HttpUtils.httpCall("kafka-native-broker-broadcast-message-data", dataMessage.getOriginalRequest(), "No no no, you should not eat something from here!");
-                HttpUtils.httpCall("kafka-native-broker-broadcast-message-data", dataMessage.getOriginalRequest(), "Here you have your recipe, enjoy! " + recipe);
             } else {
                 HttpUtils.httpCall("kafka-native-broker-recipe-postprocessor-approved-data", dataMessage.getOriginalRequest(), dataMessage.getContent());
+                HttpUtils.httpCall("kafka-native-broker-broadcast-message-data", dataMessage.getOriginalRequest(), "Here you have your recipe, enjoy! " + recipe);
             }
         } catch (Exception e) {
             System.out.println("error: " + this.getClass().getSimpleName() + ": " + e.getMessage());
