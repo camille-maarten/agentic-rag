@@ -41,7 +41,8 @@ public class RecipeContentValidatorAgent {
             String prompt = """
                     recipe: %s
                     restrictions: %s
-                    """.formatted(dataMessage.getContent(), String.join(",","restrictions"));
+                    """.formatted(dataMessage.getContent(), String.join(",",restrictions));
+            System.out.println("recipe - restrictions prompt:" + prompt);
             String isTheRecipeOkResult = bot.doesTheRecipeMatchDietaryRestrictions(prompt);
 
             System.out.println("is the recipe ok? " + isTheRecipeOkResult);

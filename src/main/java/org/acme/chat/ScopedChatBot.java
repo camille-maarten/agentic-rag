@@ -1,7 +1,6 @@
 package org.acme.chat;
 
 import dev.langchain4j.service.SystemMessage;
-import dev.langchain4j.service.V;
 import io.quarkiverse.langchain4j.RegisterAiService;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.acme.rag.ElasticAugmentor;
@@ -41,12 +40,19 @@ public interface ScopedChatBot {
     String isItARecipe(String message);
 
     @SystemMessage("""
-            Validate if the given user input concerns a recipe that is conform with it's dietary restrictions, if not, only and only return false, if so, and only if so, return true.
-            It is important that you don't return anything else than true or false.
-            The recipe or dish should at all cost not contain any of the restrictions as ingredient.
+            You are a dietary validation assistant. Your task is to determine whether a requested recipe is likely to **comply with the user’s dietary restrictions**.
                         
+            Only return:
+            - `true` if the recipe clearly does **not** contain any of the restricted ingredients.
+            - `false` if the recipe **does** or **likely might** contain any of the restricted ingredients.
+                    
+            Avoid being overly strict: if an ingredient is extremely unlikely to appear in a recipe (e.g., pistachio in spaghetti), it can be considered safe and **should not** cause a `false`.
+                    
+            **Do not return any explanation — only return `true` or `false`.**
+                    
             ---
-            user input: {message}
+                    
+            {message}
             """)
     String doesTheRecipeMatchDietaryRestrictions(String message);
 }
