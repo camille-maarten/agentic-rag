@@ -2,6 +2,7 @@ package org.acme.agents;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -17,17 +18,14 @@ import org.acme.utils.DataMessage;
 @ApplicationScoped
 public class RecipeValidatorAgent {
 
-    private final SessionScopedChatBot bot;
-
-    public RecipeValidatorAgent(SessionScopedChatBot bot) {
-        this.bot = bot;
-    }
+    @Inject
+    SessionScopedChatBot bot;
 
     @POST
     @Path("/recipe-request-validator")
     public Response submitReceivedRequest(String message) throws Exception {
         try {
-            System.out.println("/topic/recipe-request-validator => " + message);
+            System.out.println("/agent/recipe-request-validator => " + message);
             var dataMessage = new ObjectMapper().readValue(message, DataMessage.class);
             String itARecipeResult = bot.isItARecipe(dataMessage.getContent());
             System.out.println("is it a recipe? " + itARecipeResult);
