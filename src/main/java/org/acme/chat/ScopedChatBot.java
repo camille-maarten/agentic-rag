@@ -49,7 +49,7 @@ public interface ScopedChatBot {
             recipe: {recipe}
             restrictions: {restrictions}
             """)
-    String doesTheRecipeMatchDietaryRestrictions(@V("recipe") String recipe, @V("recipe") String restrictions);
+    String doesTheRecipeMatchDietaryRestrictions(@V("recipe") String recipe, @V("restrictions") String restrictions);
 }
 
 /*
