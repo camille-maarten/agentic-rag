@@ -9,6 +9,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.acme.chat.ApplicationScopedChatBot;
 import org.acme.chat.SessionScopedChatBot;
 import org.acme.utils.DataMessage;
 import org.acme.utils.HttpUtils;
@@ -22,7 +23,7 @@ import java.util.ListIterator;
 public class RecipeValidatorAgent {
 
     @Inject
-    SessionScopedChatBot bot;
+    ApplicationScopedChatBot bot;
 
     @POST
     @Path("/recipe-request-validator")
