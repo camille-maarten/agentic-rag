@@ -1,9 +1,58 @@
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
-  name: kafka-native-broker-trigger-request-received-agent
+  name: kafka-native-broker-trigger-request-received-agent # TODO rename to recipe validator agent iso request-received-agent
   namespace: elastic-vector
 spec:
   broker: kafka-native-broker-request-received-data
   subscriber:
     uri: https://admin-udi-code-redirect-3.apps.cluster-rs76q.rs76q.sandbox1797.opentlc.com/api/agent/recipe-request-validator # !!! change base URL
+---
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  annotations:
+    eventing.knative.dev/broker.class: Kafka
+  name: kafka-native-broker-recipe-validation-data
+  namespace: elastic-vector
+spec:
+  config:
+    apiVersion: v1
+    kind: ConfigMap
+    name: kafka-broker-config # config map that holds the kafka broker configurations
+    namespace: knative-eventing
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: kafka-native-broker-trigger-recipe-validation-approved-audit
+  namespace: elastic-vector
+spec:
+  broker: kafka-native-broker-recipe-validation-data
+  subscriber:
+    uri: https://admin-udi-code-redirect-3.apps.cluster-rs76q.rs76q.sandbox1797.opentlc.com/api/audit/topic/recipe-request-approved # !!! change base URL
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: kafka-native-broker-trigger-recipe-validation-rejected-audit
+  namespace: elastic-vector
+spec:
+  broker: kafka-native-broker-recipe-validation-data
+  subscriber:
+    uri: https://admin-udi-code-redirect-3.apps.cluster-rs76q.rs76q.sandbox1797.opentlc.com/api/audit/topic/recipe-request-rejected # !!! change base URL
+
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: kafka-native-broker-trigger-recipe-validation-received-audit
+  namespace: elastic-vector
+spec:
+  broker: kafka-native-broker-recipe-validation-data
+  subscriber:
+    uri: https://admin-udi-code-redirect-3.apps.cluster-rs76q.rs76q.sandbox1797.opentlc.com/api/audit/topic/recipe-validation-received # !!! change base URL
+
+

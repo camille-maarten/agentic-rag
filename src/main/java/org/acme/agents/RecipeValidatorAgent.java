@@ -11,6 +11,9 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.chat.SessionScopedChatBot;
 import org.acme.utils.DataMessage;
+import org.acme.utils.HttpUtils;
+
+import java.util.ListIterator;
 
 @Path("/api/agent")
 @Produces(MediaType.APPLICATION_JSON)
@@ -29,6 +32,19 @@ public class RecipeValidatorAgent {
             var dataMessage = new ObjectMapper().readValue(message, DataMessage.class);
             String itARecipeResult = bot.isItARecipe(dataMessage.getContent());
             System.out.println("is it a recipe? " + itARecipeResult);
+            if ("false".equalsIgnoreCase(itARecipeResult)) {
+                HttpUtils.httpCall(
+                        "recipe-request-validator-failed",
+                        dataMessage.getOriginalRequest(),
+                        "it got declined as being a recipe: " + itARecipeResult
+                );
+            } else {
+                HttpUtils.httpCall(
+                        "recipe-request-validator-succeeded",
+                        dataMessage.getOriginalRequest(),
+                        dataMessage.getContent()
+                );
+            }
         } catch (Exception e) {
             System.out.println("error: " + this.getClass().getSimpleName() + ": " + e.getMessage());
         }

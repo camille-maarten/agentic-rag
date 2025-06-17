@@ -57,8 +57,15 @@ public class RecipeRequestsAuditResource {
     // POST endpoint for recipe-request-approved
     @POST
     @Path("/topic/recipe-request-approved")
-    public Response submitApprovedRequest(DataMessage message) {
-        return submitDataMessage("recipe-request-approved", message);
+    public Response submitApprovedRequest(String message) {
+        try {
+            System.out.println("/topic/recipe-request-approved => " + message);
+            var dataMessage = new ObjectMapper().readValue(message, DataMessage.class);
+            return submitDataMessage("recipe-request-approved", dataMessage);
+        } catch (Exception e) {
+            System.out.println("error: " + e.getMessage());
+            return Response.ok().build();
+        }
     }
 
     // GET endpoint for recipe-request-approved
@@ -71,8 +78,15 @@ public class RecipeRequestsAuditResource {
     // POST endpoint for recipe-request-rejected
     @POST
     @Path("/topic/recipe-request-rejected")
-    public Response submitRejectedRequest(DataMessage message) {
-        return submitDataMessage("recipe-request-rejected", message);
+    public Response submitRejectedRequest(String message) {
+        try {
+            System.out.println("/topic/recipe-request-rejected => " + message);
+            var dataMessage = new ObjectMapper().readValue(message, DataMessage.class);
+            return submitDataMessage("recipe-request-rejected", dataMessage);
+        } catch (Exception e) {
+            System.out.println("error: " + e.getMessage());
+            return Response.ok().build();
+        }
     }
 
     // GET endpoint for recipe-request-rejected

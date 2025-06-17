@@ -2,11 +2,11 @@ package org.acme.chat;
 
 import dev.langchain4j.service.SystemMessage;
 import io.quarkiverse.langchain4j.RegisterAiService;
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import org.acme.rag.ElasticAugmentor;
 
 @RegisterAiService(retrievalAugmentor = ElasticAugmentor.class)
-@SessionScoped
+@ApplicationScoped
 public interface SessionScopedChatBot {
 
     @SystemMessage("""
@@ -22,18 +22,18 @@ public interface SessionScopedChatBot {
 
     @SystemMessage("""
             Create a magic spell that could come from a Harry Potter movie.
-            
+                        
             Introduce what it does and how it can make fun of your waiting time for a response, max 2 sentences.
 
             It should be related to the user request: {message}
-            
+                        
             """)
     String magicSpell(String message);
 
     @SystemMessage("""
             Validate if the given user input concerns a recipe, if not, only and only return false, if so, and only if so, return true.
             It is important that you don't return anything else than true or false.
-            
+                        
             ---
             user input: {message}
             """)
