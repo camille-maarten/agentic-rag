@@ -38,7 +38,11 @@ public class RecipeContentValidatorAgent {
             List<String> restrictions = client.getDietaryRestrictions();
             System.out.println("Dietary restrictions: " + restrictions);
 
-            String isTheRecipeOkResult = bot.doesTheRecipeMatchDietaryRestrictions(dataMessage.getContent(), String.join(",","restrictions"));
+            String prompt = """
+                    recipe: %s
+                    restrictions: %s
+                    """.formatted(dataMessage.getContent(), String.join(",","restrictions"));
+            String isTheRecipeOkResult = bot.doesTheRecipeMatchDietaryRestrictions(prompt);
 
             System.out.println("is the recipe ok? " + isTheRecipeOkResult);
             if ("false".equalsIgnoreCase(isTheRecipeOkResult)) {
