@@ -1,5 +1,6 @@
 package org.acme.audit;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -8,6 +9,8 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.acme.utils.DataMessage;
+import org.acme.utils.HttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +23,7 @@ import java.util.concurrent.ConcurrentMap;
 public class UserMessageReceivedResource {
 
     // In-memory storage for audit messages by topic
-    private final ConcurrentMap<String, List<AuditMessage>> auditStorage = new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, List<DataMessage>> auditStorage = new ConcurrentHashMap<>();
 
     // Initialize storage for each topic
     {
@@ -30,30 +33,38 @@ public class UserMessageReceivedResource {
     // POST endpoint for user-message-received
     @POST
     @Path("/topic/user-message-received")
-    public Response submitReceivedRequest(AuditMessage message) {
-        return submitAuditMessage("user-message-received", message);
+    public Response submitReceivedRequest(String message) {
+        try {
+            System.out.println("/topic/user-message-received => " + message);
+            var dataMessage = new ObjectMapper().readValue(message, DataMessage.class);
+            submitDataMessage("user-message-received", dataMessage);
+            return Response.ok().build();
+        } catch (Exception e) {
+            System.out.println("error: " + e.getMessage());
+            return Response.ok().build();
+        }
     }
 
     // GET endpoint for user-message-received
     @GET
     @Path("/topic/user-message-received")
     public Response getReceivedRequests() {
-        return getAuditMessages("user-message-received");
+        return getDataMessages("user-message-received");
     }
 
     // DELETE endpoint for user-message-received
     @DELETE
     @Path("/topic/user-message-received")
     public Response deleteReceivedRequests() {
-        return deleteAuditMessages("user-message-received");
+        return deleteDataMessages("user-message-received");
     }
 
     @DELETE
     @Path("/user-message-receiveds/all")
-    public Response deleteAllAuditMessages() {
+    public Response deleteAllDataMessages() {
         int totalDeleted = 0;
         for (String topic : auditStorage.keySet()) {
-            List<AuditMessage> messages = auditStorage.get(topic);
+            List<DataMessage> messages = auditStorage.get(topic);
             synchronized (messages) {
                 totalDeleted += messages.size();
                 messages.clear();
@@ -66,45 +77,40 @@ public class UserMessageReceivedResource {
     }
 
     // Helper method to submit audit message
-    private Response submitAuditMessage(String topic, AuditMessage message) {
+    private Response submitDataMessage(String topic, DataMessage message) {
         if (message == null) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new ErrorResponse("Message cannot be null"))
+                    .entity(new RecipeRequestsAuditResource.ErrorResponse("Message cannot be null"))
                     .build();
         }
 
-        if (message.getId() == null || message.getTraceId() == null) {
+        if (message.getOriginalRequest() == null || message.getMessageId() == null) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new ErrorResponse("Both id and traceId are required"))
+                    .entity(new RecipeRequestsAuditResource.ErrorResponse("Both originalRequest and messageId are required"))
                     .build();
         }
 
-        // Add timestamp if not provided
-        if (message.getTimestamp() == null) {
-            message.setTimestamp(System.currentTimeMillis());
-        }
-
-        List<AuditMessage> messages = auditStorage.get(topic);
+        List<DataMessage> messages = auditStorage.get(topic);
         synchronized (messages) {
             messages.add(message);
         }
 
         return Response.status(Response.Status.CREATED)
-                .entity(new SuccessResponse("Message submitted successfully", message.getId()))
+                .entity(new RecipeRequestsAuditResource.SuccessResponse("Message submitted successfully", message.getMessageId()))
                 .build();
     }
 
     // Helper method to get audit messages
-    private Response getAuditMessages(String topic) {
-        List<AuditMessage> messages = auditStorage.get(topic);
+    private Response getDataMessages(String topic) {
+        List<DataMessage> messages = auditStorage.get(topic);
         synchronized (messages) {
             return Response.ok(new ArrayList<>(messages)).build();
         }
     }
 
     // Helper method to delete audit messages
-    private Response deleteAuditMessages(String topic) {
-        List<AuditMessage> messages = auditStorage.get(topic);
+    private Response deleteDataMessages(String topic) {
+        List<DataMessage> messages = auditStorage.get(topic);
         int deletedCount;
         synchronized (messages) {
             deletedCount = messages.size();
@@ -112,58 +118,8 @@ public class UserMessageReceivedResource {
         }
 
         return Response.ok()
-                .entity(new DeleteResponse("Messages deleted successfully from topic: " + topic, deletedCount))
+                .entity(new RecipeRequestsAuditResource.DeleteResponse("Messages deleted successfully from topic: " + topic, deletedCount))
                 .build();
-    }
-
-    // Audit Message class
-    public static class AuditMessage {
-        private String id;
-        private String traceId;
-        private String initialRequest;
-        private Long timestamp;
-
-        public AuditMessage() {}
-
-        public AuditMessage(String id, String traceId, String initialRequest) {
-            this.id = id;
-            this.traceId = traceId;
-            this.initialRequest = initialRequest;
-            this.timestamp = System.currentTimeMillis();
-        }
-
-        // Getters and Setters
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getTraceId() {
-            return traceId;
-        }
-
-        public void setTraceId(String traceId) {
-            this.traceId = traceId;
-        }
-
-        public String getInitialRequest() {
-            return initialRequest;
-        }
-
-        public void setInitialRequest(String initialRequest) {
-            this.initialRequest = initialRequest;
-        }
-
-        public Long getTimestamp() {
-            return timestamp;
-        }
-
-        public void setTimestamp(Long timestamp) {
-            this.timestamp = timestamp;
-        }
     }
 
     // Success Response class

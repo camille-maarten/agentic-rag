@@ -31,3 +31,15 @@ spec:
 #      namespace: <NAMESPACE>
 #    uri: /api/accounts/data-change/person-data/via-broker
     uri: https://admin-udi-code-redirect-3.apps.cluster-rs76q.rs76q.sandbox1797.opentlc.com/api/chat/broadcast # !!! change base URL
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: kafka-native-broker-trigger-broadcast-message-audit
+  namespace: elastic-vector
+spec:
+  broker: kafka-native-broker-broadcast-message-data
+  subscriber:
+    uri: https://admin-udi-code-redirect-3.apps.cluster-rs76q.rs76q.sandbox1797.opentlc.com/api/audit/topic/user-message-received # !!! change base URL
+
