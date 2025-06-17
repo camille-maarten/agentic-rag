@@ -10,11 +10,8 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.chat.ApplicationScopedChatBot;
-import org.acme.chat.SessionScopedChatBot;
 import org.acme.utils.DataMessage;
 import org.acme.utils.HttpUtils;
-
-import java.util.ListIterator;
 
 @Path("/api/agent")
 @Produces(MediaType.APPLICATION_JSON)
@@ -34,22 +31,10 @@ public class RecipeValidatorAgent {
             String itARecipeResult = bot.isItARecipe(dataMessage.getContent());
             System.out.println("is it a recipe? " + itARecipeResult);
             if ("false".equalsIgnoreCase(itARecipeResult)) {
-                HttpUtils.httpCall(
-                        "kafka-native-broker-recipe-validation-rejected-data",
-                        dataMessage.getOriginalRequest(),
-                        "it got declined as being a recipe: " + itARecipeResult
-                );
-                HttpUtils.httpCall(
-                        "kafka-native-broker-broadcast-message-data",
-                        dataMessage.getOriginalRequest(),
-                        "No no no, this is not about recipes!"
-                );
+                HttpUtils.httpCall("kafka-native-broker-recipe-validation-rejected-data", dataMessage.getOriginalRequest(), "it got declined as being a recipe: " + itARecipeResult);
+                HttpUtils.httpCall("kafka-native-broker-broadcast-message-data", dataMessage.getOriginalRequest(), "No no no, this is not about recipes!");
             } else {
-                HttpUtils.httpCall(
-                        "kafka-native-broker-recipe-validation-approved-data",
-                        dataMessage.getOriginalRequest(),
-                        dataMessage.getContent()
-                );
+                HttpUtils.httpCall("kafka-native-broker-recipe-validation-approved-data", dataMessage.getOriginalRequest(), dataMessage.getContent());
             }
         } catch (Exception e) {
             System.out.println("error: " + this.getClass().getSimpleName() + ": " + e.getMessage());

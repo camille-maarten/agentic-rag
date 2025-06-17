@@ -62,8 +62,15 @@ public class RecipeValidationsAuditResource {
     // POST endpoint for recipe-validation-approved
     @POST
     @Path("/topic/recipe-validation-approved")
-    public Response submitApprovedRequest(DataMessage message) {
-        return submitDataMessage("recipe-validation-approved", message);
+    public Response submitApprovedRequest(String message) {
+        try {
+            System.out.println("/topic/recipe-validation-approved => " + message);
+            var dataMessage = new ObjectMapper().readValue(message, DataMessage.class);
+            return submitDataMessage("recipe-validation-approved", dataMessage);
+        } catch (Exception e) {
+            System.out.println("error: " + e.getMessage());
+            return Response.ok().build();
+        }
     }
 
     // GET endpoint for recipe-validation-approved
@@ -76,8 +83,15 @@ public class RecipeValidationsAuditResource {
     // POST endpoint for recipe-validation-rejected
     @POST
     @Path("/topic/recipe-validation-rejected")
-    public Response submitRejectedRequest(DataMessage message) {
-        return submitDataMessage("recipe-validation-rejected", message);
+    public Response submitRejectedRequest(String message) {
+        try {
+            System.out.println("/topic/recipe-validation-rejected => " + message);
+            var dataMessage = new ObjectMapper().readValue(message, DataMessage.class);
+            return submitDataMessage("recipe-validation-rejected", dataMessage);
+        } catch (Exception e) {
+            System.out.println("error: " + e.getMessage());
+            return Response.ok().build();
+        }
     }
 
     // GET endpoint for recipe-validation-rejected

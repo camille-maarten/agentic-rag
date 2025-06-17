@@ -38,6 +38,17 @@ public interface ScopedChatBot {
             user input: {message}
             """)
     String isItARecipe(String message);
+
+    @SystemMessage("""
+            Validate if the given user input concerns a recipe that is conform with it's dietary restrictions, if not, only and only return false, if so, and only if so, return true.
+            It is important that you don't return anything else than true or false.
+            The recipe or dish should at all cost not contain any of the restrictions as ingredient.
+                        
+            ---
+            recipe: {recipe}
+            restrictions: {restrictions}
+            """)
+    String doesTheRecipeMatchDietaryRestrictions(String recipe, String restrictions);
 }
 
 /*
