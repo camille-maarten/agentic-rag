@@ -28,7 +28,7 @@ public class RecipePostProcessorAgent {
         try {
             System.out.println("/agent/recipe-postprocessor => " + message);
             var dataMessage = new ObjectMapper().readValue(message, DataMessage.class);
-            String itARecipeFromAValidRegionResult = bot.isItARecipeFromAValidRegion("Belgium");
+            String itARecipeFromAValidRegionResult = bot.isItARecipeFromAValidRegion("Countries: Belgium");
             String recipe = bot.chat(dataMessage.getOriginalRequest());
             System.out.println("is it a recipe from a valid region? " + itARecipeFromAValidRegionResult);
             if ("false".equalsIgnoreCase(itARecipeFromAValidRegionResult)) {
