@@ -1,11 +1,11 @@
 package org.acme.chat;
 
-import dev.langchain4j.service.SystemMessage;
 import io.quarkiverse.langchain4j.RegisterAiService;
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import org.acme.rag.ElasticAugmentor;
 
 @RegisterAiService(retrievalAugmentor = ElasticAugmentor.class)
-@SessionScoped
-public interface SessionScopedChatBot extends ScopedChatBot {
+@ApplicationScoped
+public interface ApplicationScopedChatBot extends ScopedChatBot {
+
 }

@@ -11,7 +11,7 @@ import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class HttpUtils {
-    private static Long SECONDS_TO_SLEEP = 4L;
+    private static Long SECONDS_TO_SLEEP = 0L;
 
     public static void httpCall(
             String brokerName,
