@@ -1,0 +1,9 @@
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: kafka-native-broker-trigger-request-received-agent
+  namespace: elastic-vector
+spec:
+  broker: kafka-native-broker-request-received-data
+  subscriber:
+    uri: https://admin-udi-code-redirect-3.apps.cluster-rs76q.rs76q.sandbox1797.opentlc.com/api/agent/recipe-request-validator # !!! change base URL

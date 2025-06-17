@@ -27,7 +27,7 @@ public class RecipeValidatorAgent {
     @Path("/recipe-request-validator")
     public Response submitReceivedRequest(String message) throws Exception {
         try {
-            System.out.println("/topic/recipe-request-received => " + message);
+            System.out.println("/topic/recipe-request-validator => " + message);
             var dataMessage = new ObjectMapper().readValue(message, DataMessage.class);
             String itARecipeResult = bot.isItARecipe(dataMessage.getContent());
             System.out.println("is it a recipe? " + itARecipeResult);
