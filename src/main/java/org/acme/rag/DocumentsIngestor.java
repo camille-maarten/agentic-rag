@@ -41,8 +41,8 @@ public class DocumentsIngestor {
     @Inject
     MinioDocumentLoader minioDocumentLoader;
 
-    public void ingest(@Observes StartupEvent event) {
-//    public void ingest() {
+//    public void ingest(@Observes StartupEvent event) {
+    public void ingest() {
         Log.infof("Ingesting documents...");
         Log.infof("Embedding Store: " + elasticEmbeddingStore.getClass().getSimpleName());
         Log.infof("Embedding Model: " + embeddingModel.getClass().getSimpleName());
@@ -70,7 +70,7 @@ public class DocumentsIngestor {
         var ingestor = EmbeddingStoreIngestor.builder()
                 .embeddingStore(elasticEmbeddingStore)
                 .embeddingModel(embeddingModel)
-                .documentSplitter(recursive(50, 0))
+                .documentSplitter(recursive(250, 100))
                 .build();
 
             IngestionResult result = ingestor.ingest(documents);

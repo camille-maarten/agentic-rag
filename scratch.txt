@@ -3,6 +3,9 @@ rm -rf ~/.m2/wrapper/dists/
 distributionUrl=https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.6/apache-maven-3.9.6-bin.zip
 ./mvnw compile quarkus:dev
 
+nvm install 20
+nvm use 20
+
 git config --global user.name "maarten.vandeperre"
 git config --global user.email "maarten.vandeperre@gmail.com"
 
@@ -26,5 +29,11 @@ get broker:
       -H "Content-Type: application/json" \
       -d '{"birthDate": "ok", "personId": "12345", "name": "John Doe"}' \
       http://kafka-broker-ingress.knative-eventing.svc.cluster.local/elastic-vector/kafka-native-broker-broadcast-message-data
+
+
+oc exec -it my-cluster-kafka-0 \
+  -- bin/kafka-console-consumer.sh \
+  --bootstrap-server my-cluster-kafka-bootstrap.elastic-vector.svc.cluster.local:9092 \
+  --topic person-data-changed-topic
 
 

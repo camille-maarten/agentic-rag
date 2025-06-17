@@ -1,24 +1,26 @@
 package org.acme.chat;
 
-import io.quarkus.websockets.next.OnOpen;
-import io.quarkus.websockets.next.OnTextMessage;
-import io.quarkus.websockets.next.OnClose;
-import io.quarkus.websockets.next.WebSocket;
-import io.quarkus.websockets.next.WebSocketConnection;
-import io.quarkus.websockets.next.OpenConnections;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.quarkus.websockets.next.OnClose;
+import io.quarkus.websockets.next.OnOpen;
+import io.quarkus.websockets.next.OnTextMessage;
+import io.quarkus.websockets.next.OpenConnections;
+import io.quarkus.websockets.next.WebSocket;
+import io.quarkus.websockets.next.WebSocketConnection;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import org.acme.utils.HttpUtils;
+
 import java.time.Instant;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 @WebSocket(path = "/chat/{username}")
 @Path("/api/chat")
@@ -50,8 +52,13 @@ public class ChatSocket {
     }
 
     @OnTextMessage
-    public String onMessage(String message) {
-        return bot.chat(message);
+    public String onMessage(String message) throws Exception {
+        //        return bot.chat(message);
+        System.out.println("got socket message: " + message);
+        String messageValue = new ObjectMapper().readTree(message).get("message").asText();
+        HttpUtils.httpCall("kafka-native-broker-request-received-data", messageValue, null);
+        String spell = "In the meantime I got a nice spell for you: \n\n" + bot.magicSpell(message);
+        return "I start processing your request, be patient please. " + HttpUtils.toHtmlText(spell);
     }
 
     @OnClose

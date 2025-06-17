@@ -15,13 +15,16 @@ import java.util.function.Supplier;
 public class ElasticAugmentor implements Supplier<RetrievalAugmentor> {
 
     private final EmbeddingStoreContentRetriever retriever;
+    private final EmbeddingStore<TextSegment> embeddingStore;
 
     ElasticAugmentor(EmbeddingStore<TextSegment> elasticEmbeddingStore, EmbeddingModel embeddingModel) {
+        this.embeddingStore = elasticEmbeddingStore;
 
         retriever = EmbeddingStoreContentRetriever.builder()
                 .embeddingModel(embeddingModel)
                 .embeddingStore(elasticEmbeddingStore)
                 .maxResults(5)
+                .minScore(0.6) // Add minimum similarity threshold
                 .build();
     }
 
@@ -31,4 +34,5 @@ public class ElasticAugmentor implements Supplier<RetrievalAugmentor> {
                 .contentRetriever(retriever)
                 .build();
     }
+
 }

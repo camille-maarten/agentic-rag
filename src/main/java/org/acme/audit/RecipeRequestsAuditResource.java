@@ -1,16 +1,26 @@
 package org.acme.audit;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 @Path("/api/audit")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@ApplicationScoped
 public class RecipeRequestsAuditResource {
 
     // In-memory storage for audit messages by topic
@@ -26,8 +36,15 @@ public class RecipeRequestsAuditResource {
     // POST endpoint for recipe-request-received
     @POST
     @Path("/topic/recipe-request-received")
-    public Response submitReceivedRequest(AuditMessage message) {
-        return submitAuditMessage("recipe-request-received", message);
+    public Response submitReceivedRequest(String message) throws Exception {
+        try{
+            System.out.println("/topic/recipe-request-received => " + message);
+            var auditMessage = new ObjectMapper().readValue(message, RecipeRequestsAuditResource.AuditMessage.class);
+            return submitAuditMessage("recipe-request-received", auditMessage);
+        } catch (Exception e){
+            System.out.println("error: " + e.getMessage());
+            return Response.ok().build();
+        }
     }
 
     // GET endpoint for recipe-request-received
@@ -112,15 +129,10 @@ public class RecipeRequestsAuditResource {
                     .build();
         }
 
-        if (message.getId() == null || message.getTraceId() == null) {
+        if (message.getOriginalRequest() == null || message.getMessageId() == null) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new ErrorResponse("Both id and traceId are required"))
+                    .entity(new ErrorResponse("Both originalRequest and messageId are required"))
                     .build();
-        }
-
-        // Add timestamp if not provided
-        if (message.getTimestamp() == null) {
-            message.setTimestamp(System.currentTimeMillis());
         }
 
         List<AuditMessage> messages = auditStorage.get(topic);
@@ -129,7 +141,7 @@ public class RecipeRequestsAuditResource {
         }
 
         return Response.status(Response.Status.CREATED)
-                .entity(new SuccessResponse("Message submitted successfully", message.getId()))
+                .entity(new SuccessResponse("Message submitted successfully", message.getMessageId()))
                 .build();
     }
 
@@ -155,52 +167,52 @@ public class RecipeRequestsAuditResource {
                 .build();
     }
 
-    // Audit Message class
+    // Audit Message class (internal storage)
     public static class AuditMessage {
-        private String id;
-        private String traceId;
-        private String initialRequest;
-        private Long timestamp;
+        private String originalRequest;
+        private String messageId;
+        private String content;
+        private String timestamp;
 
         public AuditMessage() {}
 
-        public AuditMessage(String id, String traceId, String initialRequest) {
-            this.id = id;
-            this.traceId = traceId;
-            this.initialRequest = initialRequest;
-            this.timestamp = System.currentTimeMillis();
+        public AuditMessage(String originalRequest, String messageId, String content, String timestamp) {
+            this.originalRequest = originalRequest;
+            this.messageId = messageId;
+            this.content = content;
+            this.timestamp = timestamp;
         }
 
         // Getters and Setters
-        public String getId() {
-            return id;
+        public String getOriginalRequest() {
+            return originalRequest;
         }
 
-        public void setId(String id) {
-            this.id = id;
+        public void setOriginalRequest(String originalRequest) {
+            this.originalRequest = originalRequest;
         }
 
-        public String getTraceId() {
-            return traceId;
+        public String getMessageId() {
+            return messageId;
         }
 
-        public void setTraceId(String traceId) {
-            this.traceId = traceId;
+        public void setMessageId(String messageId) {
+            this.messageId = messageId;
         }
 
-        public String getInitialRequest() {
-            return initialRequest;
+        public String getContent() {
+            return content;
         }
 
-        public void setInitialRequest(String initialRequest) {
-            this.initialRequest = initialRequest;
+        public void setContent(String content) {
+            this.content = content;
         }
 
-        public Long getTimestamp() {
+        public String getTimestamp() {
             return timestamp;
         }
 
-        public void setTimestamp(Long timestamp) {
+        public void setTimestamp(String timestamp) {
             this.timestamp = timestamp;
         }
     }
