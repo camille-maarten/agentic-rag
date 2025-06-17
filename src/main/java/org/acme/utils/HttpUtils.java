@@ -8,14 +8,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class HttpUtils {
+    private static Long SECONDS_TO_SLEEP = 4L;
+
     public static void httpCall(
             String brokerName,
             String originalRequest,
             String content
     ){
         try {
+            TimeUnit.SECONDS.sleep(SECONDS_TO_SLEEP);
             // Create HTTP client
             HttpClient client = HttpClient.newBuilder()
                     .connectTimeout(Duration.ofSeconds(10))

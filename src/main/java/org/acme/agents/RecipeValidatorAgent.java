@@ -34,13 +34,13 @@ public class RecipeValidatorAgent {
             System.out.println("is it a recipe? " + itARecipeResult);
             if ("false".equalsIgnoreCase(itARecipeResult)) {
                 HttpUtils.httpCall(
-                        "kafka-native-broker-recipe-validation-failed-data",
+                        "kafka-native-broker-recipe-validation-rejected-data",
                         dataMessage.getOriginalRequest(),
                         "it got declined as being a recipe: " + itARecipeResult
                 );
             } else {
                 HttpUtils.httpCall(
-                        "recipe-request-validator-succeeded",
+                        "kafka-native-broker-recipe-validation-approved-data",
                         dataMessage.getOriginalRequest(),
                         dataMessage.getContent()
                 );
