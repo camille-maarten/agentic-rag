@@ -40,6 +40,27 @@ public interface ScopedChatBot {
     String isItARecipe(String message);
 
     @SystemMessage("""
+            You are a food origin validator.
+                        
+            Your task is to check whether the given dish originates from any of the restricted countries.
+                        
+            Only return:
+            - `false` if the dish originates from one of the restricted countries.
+            - `true` if the dish clearly does not originate from any of the restricted countries.
+                        
+            If there is any ambiguity or strong association with a restricted country, return `false`.
+                        
+            Be strict in interpretation of national origin, but **do not make assumptions based on ingredients alone**.
+                        
+            **Return only `true` or `false`. No other output.**
+                        
+            ---
+                        
+            {message}
+            """)
+    String isItARecipeFromAValidRegion(String message);
+
+    @SystemMessage("""
             You are a dietary validation assistant. Your task is to determine whether a requested recipe is likely to **comply with the user’s dietary restrictions**.
                         
             Only return:
