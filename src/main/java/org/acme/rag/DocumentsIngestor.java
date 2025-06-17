@@ -11,7 +11,9 @@ import io.minio.BucketExistsArgs;
 import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
 import io.quarkus.logging.Log;
+import io.quarkus.runtime.StartupEvent;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import org.acme.rag.minio.MinioDocumentLoader;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
@@ -39,8 +41,8 @@ public class DocumentsIngestor {
     @Inject
     MinioDocumentLoader minioDocumentLoader;
 
-//    public void ingest(@Observes StartupEvent event) {
-    public void ingest() {
+    public void ingest(@Observes StartupEvent event) {
+//    public void ingest() {
         Log.infof("Ingesting documents...");
         Log.infof("Embedding Store: " + elasticEmbeddingStore.getClass().getSimpleName());
         Log.infof("Embedding Model: " + embeddingModel.getClass().getSimpleName());

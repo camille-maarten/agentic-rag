@@ -51,8 +51,7 @@ public class ChatSocket {
 
     @OnTextMessage
     public String onMessage(String message) {
-        return "ok ok ok";
-//        return bot.chat(message);
+        return bot.chat(message);
     }
 
     @OnClose
