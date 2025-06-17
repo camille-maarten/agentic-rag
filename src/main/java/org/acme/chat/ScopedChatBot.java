@@ -45,8 +45,8 @@ public interface ScopedChatBot {
             The recipe or dish should at all cost not contain any of the restrictions as ingredient.
                         
             ---
-            recipe: {recipe}
-            restrictions: {restrictions}
+            recipe: {{recipe}}
+            restrictions: {{restrictions}}
             """)
     String doesTheRecipeMatchDietaryRestrictions(String recipe, String restrictions);
 }
