@@ -34,7 +34,7 @@ public class RecipeValidatorAgent {
             System.out.println("is it a recipe? " + itARecipeResult);
             if ("false".equalsIgnoreCase(itARecipeResult)) {
                 HttpUtils.httpCall(
-                        "recipe-request-validator-failed",
+                        "kafka-native-broker-recipe-validation-failed-data",
                         dataMessage.getOriginalRequest(),
                         "it got declined as being a recipe: " + itARecipeResult
                 );

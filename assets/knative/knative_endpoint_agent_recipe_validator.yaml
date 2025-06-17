@@ -13,7 +13,21 @@ kind: Broker
 metadata:
   annotations:
     eventing.knative.dev/broker.class: Kafka
-  name: kafka-native-broker-recipe-validation-data
+  name: kafka-native-broker-recipe-validation-rejected-data
+  namespace: elastic-vector
+spec:
+  config:
+    apiVersion: v1
+    kind: ConfigMap
+    name: kafka-broker-config # config map that holds the kafka broker configurations
+    namespace: knative-eventing
+---
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  annotations:
+    eventing.knative.dev/broker.class: Kafka
+  name: kafka-native-broker-recipe-validation-approved-data
   namespace: elastic-vector
 spec:
   config:
@@ -28,7 +42,7 @@ metadata:
   name: kafka-native-broker-trigger-recipe-validation-approved-audit
   namespace: elastic-vector
 spec:
-  broker: kafka-native-broker-recipe-validation-data
+  broker: kafka-native-broker-recipe-validation-approved-data
   subscriber:
     uri: https://admin-udi-code-redirect-3.apps.cluster-rs76q.rs76q.sandbox1797.opentlc.com/api/audit/topic/recipe-request-approved # !!! change base URL
 
@@ -39,7 +53,7 @@ metadata:
   name: kafka-native-broker-trigger-recipe-validation-rejected-audit
   namespace: elastic-vector
 spec:
-  broker: kafka-native-broker-recipe-validation-data
+  broker: kafka-native-broker-recipe-validation-rejected-data
   subscriber:
     uri: https://admin-udi-code-redirect-3.apps.cluster-rs76q.rs76q.sandbox1797.opentlc.com/api/audit/topic/recipe-request-rejected # !!! change base URL
 
@@ -51,7 +65,7 @@ metadata:
   name: kafka-native-broker-trigger-recipe-validation-received-audit
   namespace: elastic-vector
 spec:
-  broker: kafka-native-broker-recipe-validation-data
+  broker: kafka-native-broker-recipe-validation-approved-data
   subscriber:
     uri: https://admin-udi-code-redirect-3.apps.cluster-rs76q.rs76q.sandbox1797.opentlc.com/api/audit/topic/recipe-validation-received # !!! change base URL
 
