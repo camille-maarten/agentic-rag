@@ -8,6 +8,9 @@ git config --global user.email "maarten.vandeperre@gmail.com"
 
 git fetch origin && git reset --hard origin/devspaces-v1-openai && git pull
 
+git fetch origin && git reset --hard origin/devspaces-v1-openai && git pull && \
+    rm ./src/main/resources/application.properties && cp ../application.properties ./src/main/resources/application.properties
+
 rm ./src/main/resources/application.properties && cp ../application.properties ./src/main/resources/application.properties
 
 get broker:
