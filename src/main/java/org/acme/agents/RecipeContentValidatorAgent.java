@@ -46,7 +46,7 @@ public class RecipeContentValidatorAgent {
 
             System.out.println("is the recipe ok? " + isTheRecipeOkResult);
             if ("false".equalsIgnoreCase(isTheRecipeOkResult)) {
-                HttpUtils.httpCall("kafka-native-broker-recipe-content-validation-rejected-data", dataMessage.getOriginalRequest(), "it got declined as being a recipe: " + isTheRecipeOkResult);
+                HttpUtils.httpCall("kafka-native-broker-recipe-content-validation-rejected-data", dataMessage.getOriginalRequest(), "it got declined as being a valid recipe: " + isTheRecipeOkResult + " => " + String.join(",", restrictions));
                 HttpUtils.httpCall("kafka-native-broker-broadcast-message-data", dataMessage.getOriginalRequest(), "No no no, you are not allowed to eat " + String.join(",", restrictions) + "!");
             } else {
                 HttpUtils.httpCall("kafka-native-broker-recipe-content-validation-approved-data", dataMessage.getOriginalRequest(), dataMessage.getContent());
