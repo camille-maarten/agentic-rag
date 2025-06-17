@@ -56,7 +56,7 @@ public class ChatSocket {
         //        return bot.chat(message);
         System.out.println("got socket message: " + message);
         String messageValue = new ObjectMapper().readTree(message).get("message").asText();
-        HttpUtils.httpCall("kafka-native-broker-request-received-data", messageValue, null);
+        HttpUtils.httpCall("kafka-native-broker-request-received-data", messageValue, messageValue);
         String spell = "In the meantime I got a nice spell for you: \n\n" + bot.magicSpell(message);
         return "I start processing your request, be patient please. " + HttpUtils.toHtmlText(spell);
     }

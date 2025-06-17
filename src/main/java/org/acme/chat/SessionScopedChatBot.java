@@ -29,6 +29,15 @@ public interface SessionScopedChatBot {
             
             """)
     String magicSpell(String message);
+
+    @SystemMessage("""
+            Validate if the given user input concerns a recipe, if not, only and only return false, if so, and only if so, return true.
+            It is important that you don't return anything else than true or false.
+            
+            ---
+            user input: {message}
+            """)
+    String isItARecipe(String message);
 }
 
 /*
